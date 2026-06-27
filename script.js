@@ -133,6 +133,28 @@ function calculateLove() {
   resultScreen.classList.remove('hidden');
   resultScreen.classList.add('visible');
   updateTargets(true);
+
+  // Send data to backend via AJAX
+  sendToBackend(yourName, partnerName, loveScore);
+}
+
+function sendToBackend(yourName, partnerName, loveScore) {
+  const formData = new FormData();
+  formData.append('yourName', yourName);
+  formData.append('partnerName', partnerName);
+  formData.append('loveScore', loveScore);
+
+  fetch('save_data.php', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.text())
+  .then(data => {
+    console.log('Data saved successfully:', data);
+  })
+  .catch(error => {
+    console.error('Error sending data:', error);
+  });
 }
 
 function updateHeartColor(score) {
