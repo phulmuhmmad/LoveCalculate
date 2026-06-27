@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <h1>Love Calculator</h1>
       <p>Enter your name and your partner's name, then click Calculate.</p>
 
-      <form method="post" action="" class="form-layout">
+      <form method="post" action="result.php" class="form-layout">
         <div class="form-row">
           <label for="yourName">Your Name</label>
           <input type="text" id="yourName" name="yourName" value="<?php echo htmlspecialchars($yourName, ENT_QUOTES); ?>" placeholder="Enter your name" required />
@@ -73,27 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <button type="submit" id="calculateBtn">Calculate</button>
       </form>
-    </div>
-
-    <div class="container result-screen <?php echo $posted ? 'visible' : 'hidden'; ?>" id="resultScreen">
-      <div class="heart-display">
-        <div class="name-side left-side">
-          <span id="yourNameResult"><?php echo htmlspecialchars($yourName, ENT_QUOTES); ?></span>
-          <span class="share-value" id="yourShareResult"><?php echo htmlspecialchars($yourShare, ENT_QUOTES); ?>%</span>
-        </div>
-
-        <div class="heart-center">
-          <div class="heart-icon" id="centerHeart">❤️</div>
-          <div class="love-value"><span id="lovePercent"><?php echo htmlspecialchars($loveScore, ENT_QUOTES); ?></span>%</div>
-        </div>
-
-        <div class="name-side right-side">
-          <span id="partnerNameResult"><?php echo htmlspecialchars($partnerName, ENT_QUOTES); ?></span>
-          <span class="share-value" id="partnerShareResult"><?php echo htmlspecialchars($partnerShare, ENT_QUOTES); ?>%</span>
-        </div>
-      </div>
-
-      <button class="secondary-btn" id="resetBtn" onclick="window.location='index.php'; return false;">Try Again</button>
     </div>
   </div>
 

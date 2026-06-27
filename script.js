@@ -11,7 +11,7 @@ const yourNameResult = document.getElementById('yourNameResult');
 const partnerNameResult = document.getElementById('partnerNameResult');
 const resetBtn = document.getElementById('resetBtn');
 const canvas = document.getElementById('particleCanvas');
-const ctx = canvas.getContext('2d');
+const ctx = canvas ? canvas.getContext('2d') : null;
 
 const particleCount = 5000;
 const particles = [];
@@ -122,16 +122,18 @@ function calculateLove() {
   const yourShare = Math.round((loveScore * yourName.length) / (yourName.length + partnerName.length));
   const partnerShare = Math.max(0, loveScore - yourShare);
 
-  yourNameResult.textContent = yourName;
-  partnerNameResult.textContent = partnerName;
-  lovePercent.textContent = loveScore;
+  if (yourNameResult) yourNameResult.textContent = yourName;
+  if (partnerNameResult) partnerNameResult.textContent = partnerName;
+  if (lovePercent) lovePercent.textContent = loveScore;
   if (yourShareResult) yourShareResult.textContent = `${yourShare}%`;
   if (partnerShareResult) partnerShareResult.textContent = `${partnerShare}%`;
   updateHeartColor(loveScore);
 
-  mainContent.classList.add('hidden');
-  resultScreen.classList.remove('hidden');
-  resultScreen.classList.add('visible');
+  if (mainContent && resultScreen) {
+    mainContent.classList.add('hidden');
+    resultScreen.classList.remove('hidden');
+    resultScreen.classList.add('visible');
+  }
   updateTargets(true);
 }
 
@@ -161,8 +163,8 @@ window.addEventListener('resize', () => {
   initParticles();
 });
 
-calculateBtn.addEventListener('click', calculateLove);
-resetBtn.addEventListener('click', resetCalculator);
+if (calculateBtn) calculateBtn.addEventListener('click', calculateLove);
+if (resetBtn) resetBtn.addEventListener('click', resetCalculator);
 
 window.onload = () => {
   resizeCanvas();
